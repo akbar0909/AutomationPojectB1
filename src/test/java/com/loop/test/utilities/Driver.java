@@ -30,6 +30,7 @@ public class Driver {
      * @return driver
      * @author nsh
      */
+
     public static WebDriver getDriver(){
         if(driver==null){
             String browserType = ConfigurationReader.getProperty("browser");
@@ -53,13 +54,11 @@ public class Driver {
      * closing driver
      * @author nsh
      */
-    public static void closeDriver (){
-        if(driver !=null){
-            driver.quit();
-            driver = null;
+
+            public static void closeDriver (){
+                if(driver !=null){
+                    driver.quit();
+                    driver = null;
+                }
+            }
         }
-    }
-
-
-
-}
