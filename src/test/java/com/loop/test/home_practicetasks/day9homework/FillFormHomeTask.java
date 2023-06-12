@@ -26,6 +26,7 @@ public class FillFormHomeTask {
     public void fillForm(){
         Driver.getDriver().get(ConfigurationReader.getProperty("loop.registration"));
         Faker faker = new Faker();
+
         WebElement fistName = Driver.getDriver().findElement(By.xpath("//input[@name='firstname']"));
         fistName.sendKeys(faker.name().firstName());
         WebElement lastName = Driver.getDriver().findElement(By.xpath("//input[@name='lastname']"));

@@ -1,5 +1,7 @@
 package com.loop.test.day10_jsexutor_pom;
 
+import com.loop.pages.LoopPracticeDynamicLoadingPage;
+import com.loop.test.utilities.ConfigurationReader;
 import com.loop.test.utilities.Driver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,17 +12,25 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class T4_explicit_wait {
+    /*
+            1. go https://loopcamp.vercel.app/dynamic_loading/7.html
+            2. Wait until title is “Dynamic title”
+            3. Assert: Message “Done!” is displayed.
+            4. Assert: Image is displayed.
+     */
 
     LoopPracticeDynamicLoadingPage loopPracticeDynamicLoadingPage;
     WebDriverWait wait;
+
     @BeforeMethod
-    public void setUpMethod(){
+    public void setUpMethod() {
+        Driver.getDriver().get(ConfigurationReader.getProperty("loop."));
         loopPracticeDynamicLoadingPage = new LoopPracticeDynamicLoadingPage();
         Driver.getDriver().get("https://loopcamp.vercel.app/dynamic_loading/7.html");
     }
 
     @Test
-    public void explicit_wait_test(){
+    public void explicit_wait_test() {
         wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.titleIs("Dynamic title"));
         Assert.assertEquals(Driver.getDriver().getTitle(), "Dynamic title");
@@ -28,5 +38,4 @@ public class T4_explicit_wait {
         Assert.assertTrue(loopPracticeDynamicLoadingPage.image.isDisplayed());
 
     }
-
 }

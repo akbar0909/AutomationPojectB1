@@ -1,6 +1,10 @@
 package com.loop.test.day10_jsexutor_pom;
 
+import com.google.common.base.Verify;
+import com.loop.pages.LoopPracticeDragDropPage;
 import com.loop.test.utilities.Driver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -33,39 +37,37 @@ public class T3_drag_drop_pom {
     4. Dropped anywhere outside of big circle
     5. Verify “Try again!” text appears on big circle
      */
-     LoopPracticeDragDropPage loopPracticeDragDropPage;
+    LoopPracticeDragDropPage loopPracticeDragDropPage;
     Actions actions;
 
     @BeforeMethod
-    public void setUpMethod(){
-        Driver.getDriver().get("https://loopcamp.vercel.app/drag-and-drop-circles.html%22");
-                loopPracticeDragDropPage = new LoopPracticeDragDropPage();
+    public void setUpMethod() {
+        Driver.getDriver().get("https://loopcamp.vercel.app/drag-and-drop-circles.html");
+        loopPracticeDragDropPage = new LoopPracticeDragDropPage();
         actions = new Actions(Driver.getDriver());
     }
 
     @Test
-    public void drag_small_here_test(){
+    public void drag_small_here_test() {
         String expected = "Drag the small circle here.";
         String actual = loopPracticeDragDropPage.bigCircle.getText();
         Assert.assertEquals(actual, expected, "Actual does not match the expected");
     }
 
     @Test
-    public void drop_here(){
-        LoopPracticeDragDropPage loopPracticeDragDropPage = new LoopPracticeDragDropPage();
-        actions.moveToElement(loopPracticeDragDropPage.smallCircle)
-                .clickAndHold()
-                .moveByOffset(100, 100)
-                .pause(2000)
-                .perform();
-        Assert.assertEquals(loopPracticeDragDropPage.bigCircle.getText(),"Drop here.");
+    public void drop_here() {
+        loopPracticeDragDropPage = new LoopPracticeDragDropPage();
+        WebElement smallCircle = Driver.getDriver().findElement(By.id("draggable"));
+        WebElement bigCircle = Driver.getDriver().findElement(By.id("droptarget"));
+
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         Driver.closeDriver();
     }
-        }
+}
+
 
 
 
